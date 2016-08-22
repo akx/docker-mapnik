@@ -23,3 +23,13 @@ RUN mkdir -p /opt/node-mapnik && curl -L https://github.com/mapnik/node-mapnik/a
 RUN cd /opt/node-mapnik && npm install --unsafe-perm=true --build-from-source && npm link
 RUN mkdir -p /opt/python-mapnik && curl -L https://github.com/mapnik/python-mapnik/archive/${PYTHON_MAPNIK_COMMIT}.tar.gz | tar xz -C /opt/python-mapnik --strip-components=1
 RUN cd /opt/python-mapnik && python2 setup.py install && python3 setup.py install && rm -r /opt/python-mapnik/build
+
+# Tests
+RUN apt-get install -y unzip
+RUN mkdir -p /opt/demos
+COPY world.py /opt/demos/world.py
+COPY 110m-admin-0-countries.zip /opt/demos/110m-admin-0-countries.zip
+RUN cd /opt/demos && unzip 110m-admin-0-countries.zip && rm 110m-admin-0-countries.zip
+COPY world.js /opt/demos/world.js
+COPY stylesheet.xml /opt/demos/stylesheet.xml
+
