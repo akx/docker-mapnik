@@ -1,11 +1,9 @@
 FROM ubuntu:16.04
-ENV LANG C.UTF-8
 ENV MAPNIK_VERSION 3.0.10
 ENV NODE_MAPNIK_VERSION 3.5.13
 ENV PYTHON_MAPNIK_COMMIT 3a60211dee366060acf4e5e0de8b621b5924f2e6
 
 # Prerequisites and runtimes
-RUN update-locale LANG=C.UTF-8
 COPY setup-node.sh /tmp/setup-node.sh
 RUN bash /tmp/setup-node.sh && rm /tmp/setup-node.sh
 RUN apt-get upgrade -y && apt-get install -y --no-install-recommends \
