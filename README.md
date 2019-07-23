@@ -1,6 +1,6 @@
 # docker-mapnik
 
-> Mapnik Docker container with Node and Python bindings
+> Mapnik Docker container with Python bindings
 
 ## Building
 
@@ -13,14 +13,15 @@
 
 ## Contents of the image
 
-* Ubuntu 16.04 LTS
-* Mapnik 3.0.10 (at the time of writing)
-* Node.js 6.x
+* Mapnik 4.x (7d1bfaeb4b20b6ef2a680cd648c50851c5854e0f)
+* Node.js 8.x (but not the Mapnik bindings)
+* Python 2.7
+* Python 3.6
+* Ubuntu 18.10
 
 ### Node bindings
 
-* `/opt/node-mapnik` contains the Node bindings.
-* They are `npm link`ed, so any apps requiring them _should_ be able to just `npm link mapnik`.
+I couldn't get the Node bindings to compile against this Mapnik version, see https://github.com/mapnik/node-mapnik/issues/901
 
 ### Python bindings
 
@@ -36,11 +37,4 @@
   * Use `cd /opt/demos; python3 world.py` to try that Python 3.x works.
   * The script outputs a `world.png`. You can use `docker cp` to look at it.
 
-* The [Node.js "render a map from a stylesheet"][rmjs] demo is installed in `/opt/demos/world.js`.
-  * Use `cd /opt/demos; npm i mapnik; node world.js` to try it.
-    You'll get a crapload of deprecation warnings (see the related [bug][sbug]) since we're running Node 6,
-    but the script does output a `map.png` anyway. You can use `docker cp` to look at it.
-
 [gspy]: https://github.com/mapnik/mapnik/wiki/GettingStartedInPython
-[rmjs]: https://github.com/mapnik/node-mapnik#usage
-[sbug]: https://github.com/mapbox/node-sqlite3/issues/634
